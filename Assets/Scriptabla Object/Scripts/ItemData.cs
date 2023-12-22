@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,13 @@ public enum ConsumalbeType
     Health
 }
 
+[System.Serializable]
+public class ItemDataConsumable
+{
+    public ConsumalbeType Type;
+    public float value;
+}
+
 [CreateAssetMenu(fileName ="Item", menuName = "New Item")]
 
 public class ItemData : ScriptableObject
@@ -29,5 +37,8 @@ public class ItemData : ScriptableObject
     [Header("Stacking")]
     public bool canStck;
     public int maxStackAmount;
-   
+
+    [Header("Consumable")]
+    public ItemDataConsumable[] consumables;
+
 }
