@@ -232,17 +232,34 @@ public class Inventory : MonoBehaviour
     }
     public void OnEquipButton()
     {
+        if (uiSlots[curEquipIndex].equipped)
+        {
+            UnEquip(curEquipIndex);
+        }
 
+        uiSlots[selectedItemIndex].equipped = true;
+        curEquipIndex = selectedItemIndex;
+        EquipManager.instance.EquipNew(selectedItem.item);
+        UpDateUI();
+
+        SelectItem(selectedItemIndex);
     }
 
     private void UnEquip(int index)
     {
+        uiSlots[index].equipped = false;
+        EquipManager.instance.UnEquip();
+        UpDateUI();
 
+        if(selectedItemIndex == index)
+        {
+            SelectItem(index);
+        }
     }
 
     public void OnUnEquipButton()
     {
-
+        UnEquip(curEquipIndex);
     }
 
     public void OnDropButton()
